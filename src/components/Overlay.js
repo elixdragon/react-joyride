@@ -19,6 +19,7 @@ import Spotlight from './Spotlight';
 
 export default class JoyrideOverlay extends React.Component {
   _isMounted = false;
+  _targetResizeObserver = null;
   state = {
     mouseOverSpotlight: false,
     isScrolling: false,
@@ -60,6 +61,8 @@ export default class JoyrideOverlay extends React.Component {
     }
 
     window.addEventListener('resize', this.handleResize);
+    this._targetResizeObserver = new ResizeObserver(this.handleTargetResize);
+    this._targetResizeObserver.observe(element);
   }
 
   componentDidUpdate(prevProps) {
@@ -90,6 +93,7 @@ export default class JoyrideOverlay extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+    const { target } = this.props;
 
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('resize', this.handleResize);
@@ -97,6 +101,9 @@ export default class JoyrideOverlay extends React.Component {
     clearTimeout(this.resizeTimeout);
     clearTimeout(this.scrollTimeout);
     this.scrollParent.removeEventListener('scroll', this.handleScroll);
+    if (this._targetResizeObserver != null) {
+      this._targetResizeObserver.unobserve(getElement(target));
+    }
   }
 
   get spotlightStyles() {
@@ -172,6 +179,10 @@ export default class JoyrideOverlay extends React.Component {
 
       this.forceUpdate();
     }, 100);
+  };
+
+  handleTargetResize = () => {
+    this.forceUpdate();
   };
 
   updateState(state) {

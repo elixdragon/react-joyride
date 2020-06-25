@@ -135,12 +135,6 @@
       "limit": "30 kB"
     }
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "repo-tools check-remote && lint-staged && flow",
-      "post-merge": "repo-tools install-packages"
-    }
-  },
   "lint-staged": {
     "*.js?(x)": [
       "eslint --fix",
