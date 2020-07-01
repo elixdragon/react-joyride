@@ -201,12 +201,21 @@ export function hasPosition(el: ?HTMLElement | Node, type: string = 'fixed'): bo
 export function isElementVisible(element: ?HTMLElement): boolean {
   if (!element) return false;
 
-  let parentElement = element;
+  // let parentElement = element;
+  if (element instanceof HTMLElement) {
+    const { display, visibility } = getComputedStyle(element);
 
+    if (display === 'none' || visibility === 'hidden') {
+      return false;
+    }
+  }
+  // We don't need the parent visibility logic for now, conflicts
+  // with gmail compose window so disabling for now.
+  /*
   while (parentElement) {
     if (parentElement === document.body) break;
 
-    /* istanbul ignore else */
+    /!* istanbul ignore else *!/
     if (parentElement instanceof HTMLElement) {
       const { display, visibility } = getComputedStyle(parentElement);
 
@@ -216,7 +225,7 @@ export function isElementVisible(element: ?HTMLElement): boolean {
     }
 
     parentElement = parentElement.parentNode;
-  }
+  }*/
   return true;
 }
 
