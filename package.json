@@ -1,11 +1,11 @@
 {
   "name": "react-joyride",
-  "version": "2.2.1b",
+  "version": "2.2.1-b",
   "description": "Create guided tours for your apps",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gilbarbara/react-joyride.git"
+    "url": "git+https://github.com/elixdragon/react-joyride"
   },
   "bugs": {
     "url": "https://github.com/gilbarbara/react-joyride/issues"
@@ -29,9 +29,9 @@
   ],
   "types": "./types/index.d.ts",
   "peerDependencies": {
+    "prop-types": "^15.0.0",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
-    "prop-types": "^15.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
     "deep-diff": "^1.0.2",
