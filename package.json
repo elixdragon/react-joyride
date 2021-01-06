@@ -114,6 +114,7 @@
   "scripts": {
     "build": " npm run clean && npm run build:scripts",
     "build:scripts": "cross-env NODE_ENV=production rollup -c",
+    "prepare": " npm run build",
     "watch": "rollup -cw",
     "clean": "rimraf es && rimraf lib",
     "lint": "eslint --ext .js --ext .jsx src test",
